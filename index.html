@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>గ్రేడ్-ఏ ప్రీమియం పోర్టల్</title>
+  <title>Digital Portal</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-  <div class="app-container">
-    <div class="brand-header">
-      <!-- ఆస్తుల నుండి ఎంబ్‌లెం లోగో -->
-      <img src="assets/emblem.png" alt="Emblem" class="emblem">
-      <h1>డిజిటల్ పోర్టల్</h1>
-      <p>సమగ్ర విద్యా మరియు సేవా నిర్వహణ వ్యవస్థ</p>
-    </div>
+  <!-- Original Header -->
+  <header class="header">
+    <img src="assets/emblem.png" alt="Emblem" style="height: 50px;">
+    <h2>గ్రేడ్-ఏ పోర్టల్</h2>
+  </header>
 
-    <!-- లాగిన్ లేదా సెటప్ పేజీకి వెళ్లే బటన్ / ఫారమ్ -->
-    <div class="form-group">
-      <button type="button" class="btn-primary" onclick="window.location.href='pages/login.html'">
-        లాగిన్ అవ్వండి (Login)
+  <!-- Main Content -->
+  <main class="container">
+    <div style="text-align: center; margin-top: 40px;">
+      <h3>స్వాగతం</h3>
+      <p style="margin: 20px 0;">దయచేసి లాగిన్ అవ్వండి</p>
+      <button onclick="window.location.href='pages/login.html'" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+        లాగిన్ (Login)
       </button>
     </div>
+  </main>
 
-    <div class="app-footer">
-      <p>&copy; 2026 అడ్వాన్స్‌డ్ డిజిటల్ సిస్టమ్స్</p>
-    </div>
-  </div>
+  <!-- Original Footer -->
+  <footer class="footer">
+    <p>&copy; సర్వ హక్కులు సవరించబడినవి</p>
+  </footer>
 
   <script src="js/app.js"></script>
 </body>
