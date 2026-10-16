@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0E7B3E" />
+  <title>AP Schools · Activity Reports & Logs</title>
+
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="../assets/icon-192.png">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .reports-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .log-item {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+    }
+    .log-item h4 {
+      font-size: 0.85rem;
+      color: var(--primary-darker);
+      margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="bg-glow bg-glow-green"></div>
+    <div class="bg-glow bg-glow-gold"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div class="app">
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="../assets/emblem.png" alt="Emblem" class="header-logo" />
+        <div>
+          <h1>AP Schools</h1>
+          <p>Activity Reports</p>
+        </div>
+      </div>
+      <a href="./dashboard.html" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 600; text-decoration: none;">← Dashboard</a>
+    </header>
+
+    <main class="app-view">
+      <div class="reports-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--primary-darker); margin-bottom: 2px;">Saved Activity Logs</h2>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Review and export recorded school logs.</p>
+          </div>
+          <button onclick="clearAllLogs()" style="background: #FFEBEE; border: 1px solid #FFCDD2; color: #C62828; padding: 6px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; cursor: pointer;">Clear All</button>
+        </div>
+
+        <div id="logs-container">
+          <!-- Dynamically populated logs -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p style="font-weight: 600; color: var(--primary-dark); margin-bottom: 6px;">An initiative of @VALIASS team</p>
+      <div class="support-links" style="display: flex; justify-content: center; gap: 12px; align-items: center;">
+        <a href="tel:8985361991" class="support-link support-call" style="width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="Call">📞</a>
+        <a href="https://wa.me/918985361991" target="_blank" rel="noopener" class="support-link support-whatsapp" style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="WhatsApp">💬</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      renderLogs();
+    });
+
+    function renderLogs() {
+      const container = document.getElementById('logs-container');
+      const logs = JSON.parse(localStorage.getItem('ap_school_logs') || '[]');
+
+      if (logs.length === 0) {
+        container.innerHTML = `<p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding: 20px 0;">No activity records found yet.</p>`;
+        return;
+      }
+
+      let html = '';
+      logs.forEach((log, index) => {
+        if (log.type === 'ediary') {
+          html += `
+            <div class="log-item">
+              <h4>📖 E-Diary: ${log.subject} (${log.cls})</h4>
+              <p><strong>Date:</strong> ${log.date} | <strong>Teacher:</strong> ${log.teacher}</p>
+              <p><strong>Topic:</strong> ${log.topic}</p>
+            </div>`;
+        } else if (log.type === 'announcement') {
+          html += `
+            <div class="log-item">
+              <h4>📢 Announcement: ${log.title}</h4>
+              <p><strong>Date:</strong> ${log.date} | <strong>Target:</strong> ${log.audience}</p>
+              <p><strong>Content:</strong> ${log.content}</p>
+            </div>`;
+        } else if (log.type === 'mdm') {
+          html += `
+            <div class="log-item">
+              <h4>🍲 MDM Log: ${log.date}</h4>
+              <p><strong>Menu:</strong> ${log.menu}</p>
+              <p><strong>Students Fed:</strong> ${log.count} | <strong>Cook:</strong> ${log.cook}</p>
+            </div>`;
+        }
+      });
+      container.innerHTML = html;
+    }
+
+    function clearAllLogs() {
+      if (confirm('Are you sure you want to clear all saved activity logs?')) {
+        localStorage.removeItem('ap_school_logs');
+        renderLogs();
+      }
+    }
+  </script>
+</body>
+</html>
