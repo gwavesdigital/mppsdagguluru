@@ -1,45 +1,48 @@
 /* ==========================================
-   AP SCHOOLS E-DIARY - GLOBAL STYLESHEET
-   ================================---------- */
+   AP Schools Premium PWA - Global Stylesheet
+   Theme: Official Green (#0E7B3E) & Gold Accents (#F4C430)
+   Typography: Playfair Display & Inter
+   An initiative of @VALIASS team
+   ========================================== */
 
 :root {
   --primary-green: #0E7B3E;
-  --primary-dark: #095C2D;
-  --primary-darker: #063D1E;
-  --primary-light: #E8F8EC;
+  --primary-dark: #0A5C2F;
+  --primary-darker: #074221;
+  --primary-light: #E8F5E9;
   --accent-gold: #F4C430;
-  --accent-gold-dark: #C69A12;
+  --accent-gold-dark: #D4A017;
   
-  --surface: #FFFFFF;
-  --surface-alt: #F4F9F6;
-  --text-color: #14201A;
-  --text-muted: #5C6B63;
-  --border-color: #D2DCD6;
+  --bg-color: #F4F7F5;
+  --surface-color: #FFFFFF;
+  --surface-alt: #F8FAF9;
   
-  --shadow-sm: 0 4px 15px rgba(14, 123, 62, 0.05);
-  --shadow-md: 0 8px 30px rgba(14, 123, 62, 0.1);
-  --radius: 16px;
+  --text-color: #1F2937;
+  --text-muted: #6B7280;
+  --border-color: #D1D5DB;
+  
+  --shadow-sm: 0 4px 12px rgba(14, 123, 62, 0.06);
+  --shadow-md: 0 8px 24px rgba(14, 123, 62, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 14px;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  background-color: #F8FAF9;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
   color: var(--text-color);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* Background Gradients & Ambient Glow */
 .background {
   position: fixed;
   top: 0;
@@ -47,33 +50,31 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  pointer-events: none;
   overflow: hidden;
-  background: linear-gradient(135deg, #F2FAF5 0%, #FFFFFF 100%);
+  background: linear-gradient(135deg, #F4F7F5 0%, #E2EDE7 100%);
 }
 
 .bg-glow {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.35;
+  opacity: 0.18;
 }
 
 .bg-glow-green {
   width: 320px;
   height: 320px;
   background: var(--primary-green);
-  top: -100px;
-  right: -100px;
+  top: -80px;
+  right: -80px;
 }
 
 .bg-glow-gold {
   width: 280px;
   height: 280px;
   background: var(--accent-gold);
-  bottom: -80px;
-  left: -80px;
-  opacity: 0.25;
+  bottom: -60px;
+  left: -60px;
 }
 
 .bg-grid {
@@ -83,96 +84,93 @@ body {
   background-size: 24px 24px;
 }
 
+/* App Container Layout (Mobile First PWA Shell) */
 .app {
-  width: 100%;
   max-width: 480px;
   min-height: 100vh;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-left: 1px solid rgba(210, 220, 214, 0.5);
-  border-right: 1px solid rgba(210, 220, 214, 0.5);
+  margin: 0 auto;
+  background: var(--surface-color);
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 0 50px rgba(14, 123, 62, 0.08);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
 }
 
 @media (min-width: 481px) {
   .app {
-    min-height: 92vh;
-    border-radius: 28px;
-    box-shadow: 0 20px 60px rgba(14, 123, 62, 0.12);
-    border: 1px solid rgba(210, 220, 214, 0.8);
-    margin: 20px 0;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
   }
 }
 
+/* App Header */
 .app-header {
-  padding: 14px 20px;
   background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-darker) 100%);
-  border-bottom: 3px solid var(--accent-gold);
+  color: white;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 3px solid var(--accent-gold);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 15px rgba(14, 123, 62, 0.2);
 }
 
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .header-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1.5px solid var(--accent-gold);
-  box-shadow: 0 2px 8px rgba(244,196,48,0.4);
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
   background: white;
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .header-brand h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: #FFFFFF;
+  font-size: 1.05rem;
+  font-weight: 700;
   line-height: 1.1;
 }
 
 .header-brand p {
-  font-size: 0.65rem;
-  color: #E6F4EC;
-  font-weight: 500;
+  font-size: 0.68rem;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
 }
 
+/* App Main View */
 .app-view {
   flex: 1;
-  padding: 20px;
-  overflow-y: auto;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .home-view {
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 24px 20px;
 }
 
+/* Hero Elements */
 .hero-emblem {
-  width: 90px;
-  height: 90px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
-  margin: 0 auto 14px auto;
+  background: white;
+  padding: 6px;
   box-shadow: 0 8px 25px rgba(14, 123, 62, 0.2);
+  margin-bottom: 14px;
+  border: 2px solid var(--accent-gold);
 }
 
 .hero-emblem img {
@@ -180,17 +178,15 @@ body {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  background: white;
 }
 
 .hero-subtitle {
   font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  font-weight: 700;
   color: var(--primary-green);
-  margin-bottom: 4px;
-  display: block;
+  margin-bottom: 6px;
 }
 
 .hero-title {
@@ -198,38 +194,36 @@ body {
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--primary-darker);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
 }
 
 .hero-desc {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
+  margin-bottom: 20px;
   max-width: 360px;
-  margin: 0 auto 16px auto;
 }
 
+/* Marquee Ribbon */
 .ribbon-container {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1.5px solid rgba(14, 123, 62, 0.25);
-  border-radius: 14px;
-  padding: 8px 12px;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  margin: 12px auto 16px auto;
   width: 100%;
-  max-width: 320px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  background: var(--primary-light);
+  border: 1px solid rgba(14, 123, 62, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  white-space: nowrap;
 }
 
 .ribbon-text {
   display: inline-block;
-  animation: marquee 16s linear infinite;
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--primary-dark);
+  animation: marquee 22s linear infinite;
 }
 
 @keyframes marquee {
@@ -237,88 +231,134 @@ body {
   100% { transform: translateX(-100%); }
 }
 
+/* Buttons & Interactive Elements */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: none;
-  box-shadow: var(--shadow-sm);
+  text-decoration: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-darker) 100%);
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-dark) 100%);
   color: white;
-  box-shadow: 0 6px 20px rgba(14, 123, 62, 0.25);
+  box-shadow: 0 6px 20px rgba(14, 123, 62, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(14, 123, 62, 0.35);
+  box-shadow: 0 8px 25px rgba(14, 123, 62, 0.4);
+}
+
+.btn-block {
+  width: 100%;
 }
 
 .btn-xl {
-  width: 100%;
-  max-width: 320px;
-  padding: 14px 24px;
-  font-size: 1rem;
+  padding: 14px 28px;
+  font-size: 0.95rem;
   border-radius: 14px;
-  margin-bottom: 16px;
 }
 
+/* School Showcase Card */
 .school-showcase-card {
   width: 100%;
-  max-width: 320px;
-  height: 150px;
+  height: 140px;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  border: 1.5px solid var(--border-color);
+  margin-top: 16px;
   box-shadow: var(--shadow-sm);
-  margin: 0 auto;
+  border: 1px solid var(--border-color);
 }
 
 .school-showcase-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.school-showcase-card:hover .school-showcase-img {
-  transform: scale(1.03);
 }
 
 .school-showcase-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(6,61,30,0.85) 0%, transparent 100%);
-  padding: 12px 14px;
-  text-align: left;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 34, 17, 0.85) 0%, transparent 70%);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
 }
 
 .school-showcase-overlay span {
   color: white;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
-.app-footer {
-  padding: 14px 20px;
-  background: rgba(244, 249, 246, 0.9);
-  border-top: 1px solid var(--border-color);
-  text-align: center;
+/* Forms & Inputs */
+.form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.form-group label {
   font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-darker);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(14, 123, 62, 0.1);
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* App Footer */
+.app-footer {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border-color);
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.7rem;
   color: var(--text-muted);
 }
-```[cite: 16]
