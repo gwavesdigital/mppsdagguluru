@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0E7B3E" />
+  <title>AP Schools · Classroom E-Diary</title>
+
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="../assets/icon-192.png">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .ediary-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .seal-box {
+      border: 2px dashed var(--primary-green);
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="bg-glow bg-glow-green"></div>
+    <div class="bg-glow bg-glow-gold"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div class="app">
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="../assets/emblem.png" alt="Emblem" class="header-logo" />
+        <div>
+          <h1>AP Schools</h1>
+          <p>Classroom E-Diary</p>
+        </div>
+      </div>
+      <a href="./dashboard.html" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 600; text-decoration: none;">← Dashboard</a>
+    </header>
+
+    <main class="app-view">
+      <div class="ediary-card">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--primary-darker); margin-bottom: 4px;">Daily Teaching Log</h2>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px;">Record subject topics and class activities.</p>
+
+        <form id="ediary-form" onsubmit="handleEdiarySubmit(event)" class="form-vertical">
+          <div class="form-group">
+            <label for="entry-date">Date</label>
+            <input type="date" id="entry-date" required />
+          </div>
+
+          <div class="form-group">
+            <label for="class-standard">Class / Standard</label>
+            <select id="class-standard" required>
+              <option value="" disabled selected>-- Select Class --</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+              <option value="Class 9">Class 9</option>
+              <option value="Class 10">Class 10</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subject-name">Subject</label>
+            <select id="subject-name" required>
+              <option value="" disabled selected>-- Select Subject --</option>
+              <option value="Telugu">Telugu (తెలుగు)</option>
+              <option value="English">English</option>
+              <option value="Mathematics">Mathematics (గణితం)</option>
+              <option value="General Science">General Science</option>
+              <option value="Social Studies">Social Studies (సాంఘిక శాస్త్రం)</option>
+              <option value="Hindi">Hindi (హిందీ)</option>
+              <option value="Physical Education / Arts">Physical Education / Arts</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="teacher-name">Teacher Name</label>
+            <input type="text" id="teacher-name" placeholder="Enter teacher name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lesson-topic">Lesson / Topic Taught</label>
+            <textarea id="lesson-topic" rows="3" placeholder="Enter lesson title, concept or homework details..." required style="width: 100%; padding: 10px; border: 1.5px solid var(--border-color); border-radius: 10px; font-size: 0.85rem; font-family: inherit; resize: vertical;"></textarea>
+          </div>
+
+          <div class="seal-box">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-green); font-weight: 700; display: block; margin-bottom: 2px;">Verification Seal</span>
+            <span id="hm-seal-text" style="font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 700; color: var(--primary-darker);">Head Master Verified</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px; padding: 14px;">
+            Save & Share E-Diary →
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p style="font-weight: 600; color: var(--primary-dark); margin-bottom: 6px;">An initiative of @VALIASS team</p>
+      <div class="support-links" style="display: flex; justify-content: center; gap: 12px; align-items: center;">
+        <a href="tel:8985361991" class="support-link support-call" style="width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="Call">📞</a>
+        <a href="https://wa.me/918985361991" target="_blank" rel="noopener" class="support-link support-whatsapp" style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="WhatsApp">💬</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set today's date by default
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('entry-date').value = today;
+
+      // Pre-fill teacher name if saved previously
+      const lastTeacher = localStorage.getItem('ap_last_teacher') || localStorage.getItem('ap_hm_name') || '';
+      if (lastTeacher) {
+        document.getElementById('teacher-name').value = lastTeacher;
+      }
+    });
+
+    function handleEdiarySubmit(e) {
+      e.preventDefault();
+      const date = document.getElementById('entry-date').value;
+      const cls = document.getElementById('class-standard').value;
+      const subject = document.getElementById('subject-name').value;
+      const teacher = document.getElementById('teacher-name').value;
+      const topic = document.getElementById('lesson-topic').value;
+      const schoolName = localStorage.getItem('ap_school_name') || 'AP School';
+
+      // Save teacher name for future entries
+      localStorage.setItem('ap_last_teacher', teacher);
+
+      // Store in local array report logs
+      const newLog = {
+        type: 'ediary',
+        date,
+        cls,
+        subject,
+        teacher,
+        topic,
+        school: schoolName,
+        timestamp: Date.now()
+      };
+
+      let existingLogs = JSON.parse(localStorage.getItem('ap_school_logs') || '[]');
+      existingLogs.unshift(newLog);
+      localStorage.setItem('ap_school_logs', JSON.stringify(existingLogs));
+
+      // Build WhatsApp share string
+      const waText = encodeURIComponent(
+        `🏫 *AP SCHOOLS E-DIARY* 🍎\n` +
+        `📍 School: ${schoolName}\n` +
+        `📅 Date: ${date}\n` +
+        `🎓 Class: ${cls} | Sub: ${subject}\n` +
+        `👨‍🏫 Teacher: ${teacher}\n` +
+        `📝 Topic: ${topic}\n` +
+        `✅ Status: Head Master Verified\n\n` +
+        `_An initiative of @VALIASS team_`
+      );
+
+      alert('E-Diary entry saved successfully! Redirecting to WhatsApp share...');
+      window.open(`https://wa.me/?text=${waText}`, '_blank');
+      window.location.href = './dashboard.html';
+    }
+  </script>
+</body>
+</html>
