@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0E7B3E" />
+  <title>AP Schools · School Announcements</title>
+
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="../assets/icon-192.png">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .notice-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="bg-glow bg-glow-green"></div>
+    <div class="bg-glow bg-glow-gold"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div class="app">
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="../assets/emblem.png" alt="Emblem" class="header-logo" />
+        <div>
+          <h1>AP Schools</h1>
+          <p>Official Circulars</p>
+        </div>
+      </div>
+      <a href="./dashboard.html" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 600; text-decoration: none;">← Dashboard</a>
+    </header>
+
+    <main class="app-view">
+      <div class="notice-card">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--primary-darker); margin-bottom: 4px;">Publish Announcement</h2>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px;">Broadcast circulars to teachers, parents, and students.</p>
+
+        <form id="announcement-form" onsubmit="handleAnnouncementSubmit(event)" class="form-vertical">
+          <div class="form-group">
+            <label for="notice-date">Notice Date</label>
+            <input type="date" id="notice-date" required />
+          </div>
+
+          <div class="form-group">
+            <label for="target-audience">Target Audience</label>
+            <select id="target-audience" required>
+              <option value="" disabled selected>-- Select Audience --</option>
+              <option value="All School (Teachers & Parents)">All School (Teachers & Parents)</option>
+              <option value="Teachers & Staff Only">Teachers & Staff Only</option>
+              <option value="Parents & Students">Parents & Students</option>
+              <option value="Primary Section">Primary Section</option>
+              <option value="High School Section">High School Section</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="notice-title">Notice Title / Subject</label>
+            <input type="text" id="notice-title" placeholder="e.g., Parent-Teacher Meeting Notice" required />
+          </div>
+
+          <div class="form-group">
+            <label for="notice-content">Notice Content / Details</label>
+            <textarea id="notice-content" rows="4" placeholder="Enter circular details, timing, instructions..." required style="width: 100%; padding: 10px; border: 1.5px solid var(--border-color); border-radius: 10px; font-size: 0.85rem; font-family: inherit; resize: vertical;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="issued-by">Issued By</label>
+            <input type="text" id="issued-by" placeholder="Head Master / Authority Name" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px; padding: 14px;">
+            Publish & Share Notice →
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p style="font-weight: 600; color: var(--primary-dark); margin-bottom: 6px;">An initiative of @VALIASS team</p>
+      <div class="support-links" style="display: flex; justify-content: center; gap: 12px; align-items: center;">
+        <a href="tel:8985361991" class="support-link support-call" style="width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="Call">📞</a>
+        <a href="https://wa.me/918985361991" target="_blank" rel="noopener" class="support-link support-whatsapp" style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; box-shadow: var(--shadow-sm);" title="WhatsApp">💬</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('notice-date').value = new Date().toISOString().split('T')[0];
+      const defaultIssuer = localStorage.getItem('ap_hm_name') || '';
+      if (defaultIssuer) {
+        document.getElementById('issued-by').value = defaultIssuer;
+      }
+    });
+
+    function handleAnnouncementSubmit(e) {
+      e.preventDefault();
+      const date = document.getElementById('notice-date').value;
+      const audience = document.getElementById('target-audience').value;
+      const title = document.getElementById('notice-title').value;
+      const content = document.getElementById('notice-content').value;
+      const issuer = document.getElementById('issued-by').value;
+      const schoolName = localStorage.getItem('ap_school_name') || 'AP School';
+
+      const newLog = {
+        type: 'announcement',
+        date,
+        audience,
+        title,
+        content,
+        issuer,
+        school: schoolName,
+        timestamp: Date.now()
+      };
+
+      let existingLogs = JSON.parse(localStorage.getItem('ap_school_logs') || '[]');
+      existingLogs.unshift(newLog);
+      localStorage.setItem('ap_school_logs', JSON.stringify(existingLogs));
+
+      const waText = encodeURIComponent(
+        `📢 *AP SCHOOLS OFFICIAL CIRCULAR* 🏫\n` +
+        `📍 School: ${schoolName}\n` +
+        `📅 Date: ${date}\n` +
+        `🎯 Target: ${audience}\n\n` +
+        `📌 *${title}*\n\n` +
+        `${content}\n\n` +
+        `✍️ Issued By: ${issuer}\n\n` +
+        `_An initiative of @VALIASS team_`
+      );
+
+      alert('Announcement published successfully! Redirecting to WhatsApp share...');
+      window.open(`https://wa.me/?text=${waText}`, '_blank');
+      window.location.href = './dashboard.html';
+    }
+  </script>
+</body>
+</html>
